@@ -198,6 +198,23 @@ export default function LandingPage() {
 
         {/* Terminal mockup */}
         <TypingTerminal />
+
+        {/* Teammate video */}
+        <motion.div
+          className="mt-16 max-w-[1000px] mx-auto rounded-2xl overflow-hidden border border-slate-800 shadow-lg shadow-sky-500/10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.6 }}
+        >
+          <video
+            src="/hero-video.mp4"
+            loop
+            autoPlay
+            muted
+            playsInline
+            className="w-full h-auto"
+          />
+        </motion.div>
       </section>
 
       {/* How it works section */}

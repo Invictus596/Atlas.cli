@@ -5,10 +5,11 @@ import Link from "next/link";
 import { Loader2, Copy, Check, ArrowLeft, KeyRound } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { supabase } from "@/lib/supabase";
 
-function generateMockKey(): string {
-  const chars = "0123456789abcdef";
-  const random = Array.from({ length: 28 }, () =>
+function generateApiKey(): string {
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const random = Array.from({ length: 16 }, () =>
     chars[Math.floor(Math.random() * chars.length)]
   ).join("");
   return `ATLAS_live_${random}`;
@@ -23,15 +24,30 @@ export default function SetupPage() {
   const [apiKey, setApiKey] = useState("");
   const [copied, setCopied] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
-    setTimeout(() => {
-      setApiKey(generateMockKey());
+    const key = generateApiKey();
+
+    const { error } = await supabase
+      .from("enterprises")
+      .insert({
+        api_key: key,
+        lead_email: email,
+        ceo_phone: phone,
+        client_whatsapp: whatsapp,
+      });
+
+    if (error) {
+      console.error("Failed to insert enterprise:", error);
       setLoading(false);
-      setGenerated(true);
-    }, 1500);
+      return;
+    }
+
+    setApiKey(key);
+    setLoading(false);
+    setGenerated(true);
   };
 
   const handleCopy = async () => {
