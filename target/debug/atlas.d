@@ -1,0 +1,1 @@
+/home/invictus/Documents/Project\ Atlas/target/debug/atlas: /home/invictus/Documents/Project\ Atlas/src/ai.rs /home/invictus/Documents/Project\ Atlas/src/config.rs /home/invictus/Documents/Project\ Atlas/src/main.rs /home/invictus/Documents/Project\ Atlas/src/notifier.rs /home/invictus/Documents/Project\ Atlas/src/report.rs /home/invictus/Documents/Project\ Atlas/src/scanner.rs
